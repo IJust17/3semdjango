@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from core.models import File
 
+
 class Command(BaseCommand):
     help = "Reorder files by created date (or any other logic)."
 

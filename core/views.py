@@ -7,19 +7,22 @@ from .models import Author, File, Comment
 from .serializers import AuthorSerializer, FileSerializer, CommentSerializer
 from .filters import FileFilter
 
+
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    # @action(methods=['GET'], detail=False)
 
     @action(methods=['GET'], detail=False)
-    def abc_or_xyz(self, request):
+    def bi_or_abc(self, request):
         """
-        Вернёт авторов, в имени которых есть 'abc' или 'xyz',
-        при этом они НЕ начинаются на 'test'.
+        Вернёт авторов, в имени которых есть 'bi' или 'abc',
+        при этом они НЕ начинаются на 'me'.
         """
+        # минимум два запроса с Q включающие AND NOT
         qs = self.get_queryset().filter(
-            (Q(name__icontains='abc') | Q(name__icontains='xyz')) &
-            ~Q(name__startswith='test')
+            (Q(name__icontains='bi') | Q(name__icontains='abc'))
+            & ~Q(name__startswith='me')
         )
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)
@@ -32,14 +35,14 @@ class FileViewSet(viewsets.ModelViewSet):
     search_fields = ['name', 'description']  # для SearchFilter из DRF
 
     @action(methods=['GET'], detail=False)
-    def doc_or_pdf(self, request):
+    def cat_or_stalker(self, request):
         """
-        Вернёт файлы, у которых description содержит 'doc' или 'pdf',
-        и исключит те, у которых name содержит 'test'.
+        Вернёт файлы, у которых description содержит 'cat' или 'stalker',
+        и исключит те, у которых name содержит 'bi'.
         """
         qs = self.get_queryset().filter(
-            (Q(description__icontains='doc') | Q(description__icontains='pdf')) &
-            ~Q(name__icontains='test')
+            (Q(description__icontains='cat') | Q(description__icontains='stalker'))
+            & ~Q(name__icontains='bi')
         )
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)

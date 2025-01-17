@@ -2,6 +2,7 @@ import django_filters
 from django_filters import rest_framework as filters
 from .models import File
 
+
 class FileFilter(filters.FilterSet):
     name_exact = filters.CharFilter(field_name='name', lookup_expr='exact')
     name_icontains = filters.CharFilter(field_name='name', lookup_expr='icontains')

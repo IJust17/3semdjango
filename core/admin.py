@@ -8,7 +8,6 @@ from .models import Author, File, Comment
 from .resources import FileResource
 
 
-
 # 1) AuthorAdmin
 
 @admin.register(Author)
@@ -24,7 +23,6 @@ class AuthorAdmin(SimpleHistoryAdmin):
             'fields': ('name',),
         }),
     )
-
 
 
 # 2) FileAdmin
@@ -61,16 +59,15 @@ class FileAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     # форматы экспорта
     def get_export_formats(self):
         formats = [
-            base_formats.CSV,    
-            base_formats.XLSX,   
+            base_formats.CSV,
+            base_formats.XLSX,
             base_formats.JSON,
-            
+
         ]
         return [f for f in formats if f().can_export()]
 
 
 admin.site.register(File, FileAdmin)
-
 
 
 # 3) CommentAdmin
