@@ -16,8 +16,8 @@ class AuthorViewSet(viewsets.ModelViewSet):
     @action(methods=['GET'], detail=False)
     def bi_or_abc(self, request):
         """
-        Вернёт авторов, в имени которых есть 'bi' или 'abc',
-        при этом они НЕ начинаются на 'me'.
+        авторов, в имени которых есть 'bi' или 'abc',
+        при этом они не начинаются на 'me'.
         """
         # минимум два запроса с Q включающие AND NOT
         qs = self.get_queryset().filter(
@@ -37,7 +37,7 @@ class FileViewSet(viewsets.ModelViewSet):
     @action(methods=['GET'], detail=False)
     def cat_or_stalker(self, request):
         """
-        Вернёт файлы, у которых description содержит 'cat' или 'stalker',
+        файлы, у которых description содержит 'cat' или 'stalker',
         и исключит те, у которых name содержит 'bi'.
         """
         qs = self.get_queryset().filter(
@@ -50,9 +50,9 @@ class FileViewSet(viewsets.ModelViewSet):
     @action(methods=['POST'], detail=True)
     def change_description(self, request, pk=None):
         """
-        Изменяем description файла POST-запросом:
+        изменение description файла POST-запросом:
         {
-            "description": "New desc"
+           
         }
         """
         file_obj = self.get_object()
@@ -73,7 +73,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     @action(methods=['GET'], detail=False)
     def django_comments(self, request):
         """
-        Вернёт все комментарии, содержащие 'django' в тексте.
+        выбрать все комментарии, содержащие 'django' в тексте.
         """
         qs = self.get_queryset().filter(text__icontains='django')
         serializer = self.get_serializer(qs, many=True)

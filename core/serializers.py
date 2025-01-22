@@ -8,7 +8,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         model = Author
         fields = '__all__'
 
-    # (1) Имя автора не должно быть только из цифр
+    #  Имя автора не должно быть только из цифр
     def validate_name(self, value):
         if value.isdigit():
             raise ValidationError("Имя автора не может состоять только из цифр.")
@@ -20,7 +20,7 @@ class FileSerializer(serializers.ModelSerializer):
         model = File
         fields = '__all__'
 
-    # (2) Имя файла >= 3 символов
+    # Имя файла >= 3 символов
     def validate_name(self, value):
         if len(value) < 3:
             raise ValidationError("Имя файла должно содержать минимум 3 символа.")
@@ -32,8 +32,8 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = '__all__'
 
-    # (3) Не содержит forbidden
+    #  Не содержит cocacola
     def validate_text(self, value):
-        if "forbidden" in value.lower():
-            raise ValidationError("Комментарий не должен содержать слово 'forbidden'.")
+        if "cocacola" in value.lower():
+            raise ValidationError("Комментарий не должен содержать слово 'cocacola'.")
         return value

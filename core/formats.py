@@ -4,7 +4,7 @@ import tablib
 
 class SemiColonCSV(base_formats.CSV):
     """
-    Кастомный CSV-формат с разделителем ";"
+    CSV-формат с разделителем ";"
     """
 
     def create_dataset(self, in_stream, **kwargs):

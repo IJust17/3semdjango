@@ -7,11 +7,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """
-        Пример: достаём все File, сортируем по created_at (по возрастанию)
+       , сортируем по created_at (по возрастанию)
         и в соответствии с порядком обновляем поле 'sort_index'.
         """
 
-        files = File.objects.all().order_by('created_at')
+        files = File.objects.all().order_by('sort_index')
         # sort_index = порядковый номер
         for i, f in enumerate(files, start=1):
             f.sort_index = i
